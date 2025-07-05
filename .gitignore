@@ -3,7 +3,7 @@ __pycache__/
 *.py[cod]
 
 # Large model binaries
-/models/
+models/
 *.gguf
 
 # Virtual environment
