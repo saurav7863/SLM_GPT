@@ -1,5 +1,7 @@
 __pycache__/
 *.py[cod]
+/models/
+/*.gguf
 venv/
 .streamlit/secrets.toml
 .DS_Store
