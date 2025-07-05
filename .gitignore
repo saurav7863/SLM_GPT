@@ -1,6 +1,17 @@
+# Byte-compiled / optimized / DLL files
 __pycache__/
-*.pyc
+*.py[cod]
+*.class
+
+# Virtual environments
 venv/
+
+# Streamlit secrets (if any)
 .streamlit/secrets.toml
+
+# Mac-specific
+.DS_Store
+
+# Logs, temp files
 *.log
 tmp*/
