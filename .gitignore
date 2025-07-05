@@ -1,13 +1,20 @@
+# Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
+
 # Large model binaries
-models/
+/models/
 *.gguf
 
-# OS and temp files
-.DS_Store
+# Virtual environment
 venv/
+
+# Streamlit secrets
 .streamlit/secrets.toml
+
+# OS-specific files
 .DS_Store
+
+# Logs and temp files
 *.log
 tmp*/
