@@ -1,7 +1,11 @@
 __pycache__/
 *.py[cod]
-/models/
-/*.gguf
+# Large model binaries
+models/
+*.gguf
+
+# OS and temp files
+.DS_Store
 venv/
 .streamlit/secrets.toml
 .DS_Store
