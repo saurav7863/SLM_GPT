@@ -55,3 +55,9 @@ From the project root:
 streamlit run app.py
 ```
 This will launch the Streamlit UI in your browser at <http://localhost:8501/>.
+
+## UI Preview
+
+Below is a screenshot of the application UI:
+
+![UI of Small Language Model](Output.png)

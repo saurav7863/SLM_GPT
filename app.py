@@ -1,12 +1,34 @@
 import streamlit as st
 from agent import Agent
 
+
 # Page configuration
 st.set_page_config(
     page_title="SLM-Assistant",
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+# --- Custom CSS for corporate styling ---
+st.markdown("""
+<style>
+/* Light grey page background */
+[data-testid="stAppViewContainer"] > .main {
+    background-color: #f5f7fa;
+}
+/* Primary color for headers and buttons */
+h1, h2, h3, .stButton>button {
+    color: #0052cc !important;
+    background-color: transparent !important;
+    border-radius: 5px !important;
+}
+/* Sidebar styling */
+[data-testid="stSidebar"] {
+    background-color: #ffffff !important;
+    border-right: 1px solid #e1e5ee;
+}
+</style>
+""", unsafe_allow_html=True)
 
 # Default context window
 DEFAULT_CTX = 2048
@@ -21,17 +43,21 @@ if 'agent' not in st.session_state:
         keep_last=3
     )
 
-# Display logo
+# Display logo and styled title
 logo_path = "/Users/saurav/Desktop/GPT_LLM/logo.WEBP"
-st.image(logo_path, width=120)
+# --- Header with logo and styled title ---
+header_col1, header_col2 = st.columns([1, 8], gap="small")
+with header_col1:
+    st.image(logo_path, width=60)
+with header_col2:
+    st.markdown("<h1 style='margin: 0; color: #0052cc;'>SLM-Assistant</h1>", unsafe_allow_html=True)
+    st.caption("Your enterprise-grade conversational assistant")
+st.divider()
 
-st.title("SLM-Assistant")
+# --- Sidebar navigation ---
+page = st.sidebar.radio("Navigate to", ["💬 Chat", "⚙️ Settings"], index=0)
 
-# Create UI tabs
-tab1, tab2 = st.tabs(["💬 Chat", "⚙️ Settings"])
-
-# -------- Chat Tab --------
-with tab1:
+if page == "💬 Chat":
     st.header("Chat")
 
     with st.form(key="chat_form", clear_on_submit=True):
@@ -55,7 +81,7 @@ with tab1:
         st.session_state.agent.history.append({'role':'user','content':text})
         chat_container.chat_message("user").write(text)
 
-                # Stream assistant response word-by-word into one placeholder
+        # Stream assistant response word-by-word into one placeholder
         placeholder = chat_container.empty()
         full_text = ""
         for token in st.session_state.agent.stream_chat(text):
@@ -66,8 +92,7 @@ with tab1:
         chat_container.chat_message("assistant").write(full_text)
         placeholder.empty()
 
-# ------ Settings Tab ------
-with tab2:
+elif page == "⚙️ Settings":
     st.header("Settings & Tools")
     st.subheader("Commands")
     st.markdown(
@@ -89,3 +114,6 @@ with tab2:
         )
         st.session_state.agent.history = old.history
         st.success(f"Context window set to {ctx} tokens.")
+
+st.sidebar.markdown("---")
+st.sidebar.caption("© 2025 YourCompany Inc.")
